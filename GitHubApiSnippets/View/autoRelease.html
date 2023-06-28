@@ -1,0 +1,111 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/NicEdit/0.93/nicEdit.min.js" integrity="sha512-rsE25pK/XkI20cvXanU1xC7QcyDEaM2cdcVS53Y/1oSNfKv8uCA/2DagW1BX/cwR6u6Zq3/zY+L+3zoBvfgi5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+     <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
+</head>
+<body class="center">
+     <h2 class="text-center"><u> AI Technothon </u></h2>
+          <br/>
+    <!-- Serach Bar  -->
+    <div class="card center-block mx-auto" style="width: 75rem;">
+        <div class="card-body">
+          <div class="container">
+          <div class="row g-3 align-items-center">
+            <div class="col-md-4">
+                <label for="inputOwner" class="form-label">Enter Owner</label>
+                <input type="text" class="form-control" id="inputOwner" aria-labelledby="ownerHelpInline">
+            </div>
+            <div class="col-md-4">
+                <label for="inputRepository" class="form-label">Enter Repository</label>
+                <input type="text" class="form-control" id="inputRepository" aria-labelledby="ownerHelpInline">
+            </div>
+          </div>
+          <div class="row g-3 align-items-center">
+            <div class="col-md-4">
+                <label for="fromDate" class="form-label">From Date</label>
+                <input type="text" class="form-control" id="fromDate" aria-labelledby="ownerHelpInline">
+            </div>
+            <div class="col-md-4">
+                <label for="toDate" class="form-label">To Date</label>
+                <input type="text" class="form-control" id="toDate" aria-labelledby="ownerHelpInline">
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-info">Get Commits</button>
+            </div>
+            <div class="col-md-2">
+                <!-- TODO: Enable this button only after some commit details are displayed or after commit button click -->
+                <button type="button" class="btn btn-danger disabled">Generate Release Note</button>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <!-- Commit Details  -->
+    <div class="card center-block mx-auto" style="width: 75rem;">
+        <div class="card-body">
+            <h4><strong> Commit Details</strong></h4>
+            <table class="table table-info table-striped">
+                <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Commit ID</th>
+                      <th scope="col">Commit Message</th>
+                      <th scope="col">Commit Date</th>
+                      <th scope="col">Committed By</th>
+                    </tr>
+                  </thead>
+                  <!--  TODO: Loop on rows using dataset coming from controller -->
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>123</td>
+                      <td>Initial Commit</td>
+                      <td>12-08-2009</td>
+                      <td>Namita </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td>456</td>
+                      <td>Second Commit</td>
+                      <td>04-05-2010</td>
+                      <td>Gayeetri </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td>789</td>
+                      <td>Final Commit</td>
+                      <td>23-12-2023</td>
+                      <td>Prajay </td>
+                    </tr>
+                  </tbody>
+              </table>
+        </div>
+    </div>
+    <br />
+    <!-- Commit Details  -->
+    <!-- TODO: Display this card only after clicking on "Generate Release Note" button -->
+    <div class="card center-block mx-auto" style="width: 75rem;">
+        <div class="card-body">
+            <h4><strong> Release Note</strong></h4>
+            <textarea id="myNicPanel" style="width: 100%;min-height: 10rem;">
+                <b>Release 1.0.4</b>
+
+April 10, 2023
+<br/>
+<br/>
+1. Private Groups
+2. Technology-specific Leaderboards
+3. Modernizing the badge page
+4. Changed the UI for adding comments in the question section
+5. Fastest finger first event quiz
+6. Filter articles by article tag
+
+            </textarea>
+        </div>
+        </div>
+    </div>
+
+</body>
+</html>
