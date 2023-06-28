@@ -24,17 +24,17 @@
             datatype: 'json',
             cache: false,
             success: function(data) {
-              // data = JSON.parse(data);
-              // console.log(data);
-              alert(`Total `+data.length+` commits found!`);
-              commitDetails = data.map(function(key){
+              commitDetails = [];
+              commitDetails = data.map(function(key,index){
                                   return {
+                                      sno: index+1,
                                       message : key.commit.message,
                                       committedBy: key.commit.author.name,
                                       commitDate: key.commit.author.date
                                   }
                         });
               console.log("Commit Details: ",commitDetails);
+              showCommitedData();
             },
             error: function(data){
               alert("Repository Not Fount! Please check details.");
@@ -43,6 +43,21 @@
           });
         }
     }
+
+    function showCommitedData(){
+      const table = document.getElementById('commitTableBody');
+      table.innerHTML = "";
+      for(const obj of commitDetails){
+        const row = document.createElement('tr');
+        for(const val of Object.values(obj)){
+          const col = document.createElement('td');
+          col.textContent = val;
+          row.appendChild(col);
+        }
+        table.appendChild(row);
+      }
+    }
+
      </script>
 </head>
 <body class="center">
@@ -55,21 +70,21 @@
           <div class="row g-3 align-items-center">
             <div class="col-md-4">
                 <label for="inputOwner" class="form-label">Enter Owner</label>
-                <input type="text" class="form-control" id="inputOwner" aria-labelledby="ownerHelpInline">
+                <input type="text" class="form-control" id="inputOwner" aria-labelledby="ownerHelpInline"- value="namitamehta">
             </div>
             <div class="col-md-4">
                 <label for="inputRepository" class="form-label">Enter Repository</label>
-                <input type="text" class="form-control" id="inputRepository" aria-labelledby="ownerHelpInline">
+                <input type="text" class="form-control" id="inputRepository" aria-labelledby="ownerHelpInline" value="GitHubApiSnippets">
             </div>
           </div>
           <div class="row g-3 align-items-center">
             <div class="col-md-4">
                 <label for="fromDate" class="form-label">From Date</label>
-                <input type="text" class="form-control" id="fromDate" aria-labelledby="ownerHelpInline">
+                <input type="text" class="form-control" id="fromDate" aria-labelledby="ownerHelpInline" value="2023-01-25">
             </div>
             <div class="col-md-4">
                 <label for="toDate" class="form-label">To Date</label>
-                <input type="text" class="form-control" id="toDate" aria-labelledby="ownerHelpInline">
+                <input type="text" class="form-control" id="toDate" aria-labelledby="ownerHelpInline" value="2023-06-25">
             </div>
             <div class="col-md-2">
                 <button id="button" type="button" class="btn btn-info" onclick="getCommits()" >Get Commits</button>
@@ -92,35 +107,14 @@
                 <thead>
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">Commit ID</th>
+                      <!-- <th scope="col">Commit ID</th> -->
                       <th scope="col">Commit Message</th>
                       <th scope="col">Commit Date</th>
                       <th scope="col">Committed By</th>
                     </tr>
                   </thead>
                   <!--  TODO: Loop on rows using dataset coming from controller -->
-                  <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>123</td>
-                      <td>Initial Commit</td>
-                      <td>12-08-2009</td>
-                      <td>Namita </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>456</td>
-                      <td>Second Commit</td>
-                      <td>04-05-2010</td>
-                      <td>Gayeetri </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>789</td>
-                      <td>Final Commit</td>
-                      <td>23-12-2023</td>
-                      <td>Prajay </td>
-                    </tr>
+                  <tbody id="commitTableBody">
                   </tbody>
               </table>
         </div>
