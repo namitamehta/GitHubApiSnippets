@@ -7,6 +7,8 @@
      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
      <script>
       var commitDetails; // data coming from commit list api
+      var releaseNote; // release note generated using commit messages
+
       function getCommits(){
         var repo = document.getElementById("inputRepository").value.trim(); //'GitHubApiSnippets'; 
         var owner = document.getElementById("inputOwner").value.trim(); // 'namitamehta';
@@ -58,6 +60,17 @@
       }
     }
 
+    function generateReleaseNote(){
+        // create html string using array of object        
+        releaseNote = commitDetails.map(function(key,index){
+          return `<b> `+key.sno+` </b> `+key.message+`<br/>`;
+        });
+        releaseNote = releaseNote.join(' ');
+        console.log("Release Note: ",releaseNote);
+        // display generated html string
+        document.getElementById("myNicPanel").innerHTML = releaseNote;
+    }
+   
      </script>
 </head>
 <body class="center">
@@ -91,7 +104,7 @@
             </div>
             <div class="col-md-2">
                 <!-- TODO: Enable this button only after some commit details are displayed or after commit button click -->
-                <button type="button" class="btn btn-danger disabled">Generate Release Note</button>
+                <button type="button" class="btn btn-danger disabled" onclick="generateReleaseNote()">Generate Release Note</button>
             </div>
         </div>
         </div>
@@ -108,9 +121,9 @@
                     <tr>
                       <th scope="col">#</th>
                       <!-- <th scope="col">Commit ID</th> -->
+                      <th scope="col">Committed By</th>
                       <th scope="col">Commit Message</th>
                       <th scope="col">Commit Date</th>
-                      <th scope="col">Committed By</th>
                     </tr>
                   </thead>
                   <!--  TODO: Loop on rows using dataset coming from controller -->
@@ -125,20 +138,12 @@
     <div class="card center-block mx-auto" style="width: 75rem;">
         <div class="card-body">
             <h4><strong> Release Note</strong></h4>
-            <textarea id="myNicPanel" style="width: 100%;min-height: 10rem;">
-                <b>Release 1.0.4</b>
+            <!-- Rich text editor not working with dynamic data binding -->
+            <!-- <textarea id="myNicPanel" style="width: 100%;min-height: 10rem;">
+            </textarea> -->
 
-April 10, 2023
-<br/>
-<br/>
-1. Private Groups
-2. Technology-specific Leaderboards
-3. Modernizing the badge page
-4. Changed the UI for adding comments in the question section
-5. Fastest finger first event quiz
-6. Filter articles by article tag
-
-            </textarea>
+            <textbox id="myNicPanel" style="width: 100%;min-height: 10rem;">
+            </textbox>
         </div>
         </div>
     </div>
