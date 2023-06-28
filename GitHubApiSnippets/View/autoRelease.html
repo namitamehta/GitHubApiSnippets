@@ -10,9 +10,11 @@
       function getCommits(){
         var repo = document.getElementById("inputRepository").value.trim(); //'GitHubApiSnippets'; 
         var owner = document.getElementById("inputOwner").value.trim(); // 'namitamehta';
-        var requestData = {"since":document.getElementById("fromDate").value.trim(), "until": document.getElementById("toDate").value.trim()};
+        let fromDate = document.getElementById("fromDate").value.trim();
+        let toDate = document.getElementById("toDate").value.trim();
+        var requestData = {"since": fromDate, "until": toDate};
         //{"since":"2020-01-01", "until": "2023-06-25"}; // needed date format - YYYY-MM-DDTHH:MM:SSZ
-        if(!repo || !owner){
+        if(!repo || !owner || !fromDate || !toDate){
           alert("All fields are mandatory!");
         } else {
         $.ajax({
@@ -24,7 +26,7 @@
             success: function(data) {
               // data = JSON.parse(data);
               console.log(data);
-              console.log('Count', data.length);
+              alert(`Total `+data.length+` commits found!`);
               commitDetails = data;
             },
             error: function(data){
