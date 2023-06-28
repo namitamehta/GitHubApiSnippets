@@ -25,9 +25,16 @@
             cache: false,
             success: function(data) {
               // data = JSON.parse(data);
-              console.log(data);
+              // console.log(data);
               alert(`Total `+data.length+` commits found!`);
-              commitDetails = data;
+              commitDetails = data.map(function(key){
+                                  return {
+                                      message : key.commit.message,
+                                      committedBy: key.commit.author.name,
+                                      commitDate: key.commit.author.date
+                                  }
+                        });
+              console.log("Commit Details: ",commitDetails);
             },
             error: function(data){
               alert("Repository Not Fount! Please check details.");
@@ -80,6 +87,7 @@
     <div class="card center-block mx-auto" style="width: 75rem;">
         <div class="card-body">
             <h4><strong> Commit Details</strong></h4>
+            <!-- TODO: Convert to data table to show data ,refr - https://datatables.net/examples/data_sources/js_array.html -->
             <table class="table table-info table-striped">
                 <thead>
                     <tr>
