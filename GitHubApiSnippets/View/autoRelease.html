@@ -35,12 +35,19 @@
                                       commitDate: key.commit.author.date
                                   }
                         });
-              console.log("Commit Details: ",commitDetails);
-              showCommitedData();
             },
             error: function(data){
-              alert("Repository Not Fount! Please check details.");
+              alert("Repository Not Found! Please check details.");
+              commitDetails = [];
               console.log("Git Commit Error: ",data)
+            },
+            complete: function(data){
+              console.log("Commit Details: ",commitDetails);
+              if(commitDetails.length > 0){
+                showCommitedData();
+              } else {
+                reset();
+              }
             }
           });
         }
@@ -58,6 +65,7 @@
         }
         table.appendChild(row);
       }
+      document.getElementById("generateRelaseNote").disabled = false;
     }
 
     function generateReleaseNote(){
@@ -71,6 +79,12 @@
         document.getElementById("myNicPanel").innerHTML = releaseNote;
     }
    
+    function reset(){
+      document.getElementById('commitTableBody').innerHTML = "";
+      document.getElementById("myNicPanel").innerHTML = "";
+      document.getElementById("generateRelaseNote").disabled = true;
+    }
+
      </script>
 </head>
 <body class="center">
@@ -104,7 +118,7 @@
             </div>
             <div class="col-md-2">
                 <!-- TODO: Enable this button only after some commit details are displayed or after commit button click -->
-                <button type="button" class="btn btn-danger disabled" onclick="generateReleaseNote()">Generate Release Note</button>
+                <button id="generateRelaseNote" type="button" class="btn btn-danger" disabled="disabled" onclick="generateReleaseNote()">Generate Release Note</button>
             </div>
         </div>
         </div>
