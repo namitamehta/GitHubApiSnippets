@@ -18,6 +18,9 @@ Given below is our main screen -
 3) Now on clicking on "Release Note" button, based on commit list a release note will be generated & displayed on screen.
 4) A programer can use that release note in there github application, it helps in easy creation of release Note.
 
+### SetUp - 
+Doube click on autoRelease.html file to run code.
+
 ## Contributors ✨
 1) Gayeetri Naik
 2) Namita Mehta
